@@ -1,78 +1,61 @@
-# Báo cáo thực hành kiểm thử tự động với Selenium
+# Selenium SauceDemo
 
-## 1. Giới thiệu Selenium
+## Giới thiệu Selenium
 
-Selenium là một công cụ mã nguồn mở dùng để tự động hóa thao tác trên trình duyệt web. Selenium cho phép viết script để mô phỏng hành vi người dùng như mở trang web, nhập dữ liệu, nhấn nút, kiểm tra nội dung hiển thị và xác nhận kết quả bằng các câu lệnh kiểm thử.
+Selenium là công cụ dùng để tự động hóa trình duyệt web. Selenium có thể mô phỏng các thao tác của người dùng như mở trang web, nhập dữ liệu, bấm nút, kiểm tra nội dung hiển thị và xác nhận kết quả kiểm thử.
 
-Trong bài thực hành này, Selenium được kết hợp với Python và Pytest để xây dựng các test case kiểm thử tự động cho website SauceDemo.
+Trong bài thực hành này, Selenium được sử dụng với Python, Pytest và webdriver-manager để kiểm thử tự động website SauceDemo.
 
-## 2. Website được kiểm thử
+## Website dùng để kiểm thử
 
-- Website: <https://www.saucedemo.com/>
-- Mục đích kiểm thử: kiểm tra chức năng đăng nhập, hiển thị danh sách sản phẩm và thêm sản phẩm vào giỏ hàng.
+Trang web dùng để kiểm thử: https://www.saucedemo.com/
 
-Tài khoản dùng để kiểm thử:
+Tài khoản kiểm thử:
 
 - Username: `standard_user`
 - Password: `secret_sauce`
 
-## 3. Công cụ sử dụng
+Ảnh trang web SauceDemo:
 
-Project sử dụng các công cụ và thư viện sau:
+![Trang web SauceDemo](screenshots/saucedemo-home.png)
 
-- Python: ngôn ngữ lập trình dùng để viết test script.
-- Selenium: thư viện tự động hóa trình duyệt web.
-- Pytest: framework dùng để tổ chức và chạy test case.
-- webdriver-manager: thư viện tự động tải và quản lý ChromeDriver.
-- Google Chrome: trình duyệt dùng để chạy kiểm thử.
+## Công cụ sử dụng
 
-## 4. Cấu trúc project
+- Python
+- Selenium
+- Pytest
+- webdriver-manager
+- Google Chrome
+
+## Cấu trúc project
 
 ```text
 saucedemo-selenium-pytest/
 ├── tests/
 │   └── test_saucedemo.py
+├── screenshots/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
 ```
 
-## 5. Cách cài đặt
+## Cách cài đặt
 
-Bước 1: Clone hoặc tải project về máy.
-
-```bash
-git clone <link-repository-github>
-cd saucedemo-selenium-pytest
-```
-
-Bước 2: Tạo môi trường ảo Python.
-
-```bash
-python -m venv .venv
-```
-
-Bước 3: Kích hoạt môi trường ảo.
-
-Trên Windows:
-
-```bash
-.venv\Scripts\activate
-```
-
-Trên macOS hoặc Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-Bước 4: Cài đặt thư viện cần thiết.
+Cài đặt các thư viện cần thiết:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 6. Cách chạy test
+File `requirements.txt` gồm:
+
+```text
+selenium
+pytest
+webdriver-manager
+```
+
+## Cách chạy test
 
 Chạy toàn bộ test case bằng lệnh:
 
@@ -80,55 +63,82 @@ Chạy toàn bộ test case bằng lệnh:
 pytest -v
 ```
 
-Sau khi chạy, Pytest sẽ hiển thị kết quả `PASSED` hoặc `FAILED` cho từng test case.
+Kết quả chạy test:
 
-## 7. Mô tả test case
+![Kết quả chạy test](screenshots/pytest-result.png)
 
-### TC01: Đăng nhập thành công
+## Test case 01: Đăng nhập thành công
 
-- Mục tiêu: kiểm tra người dùng có thể đăng nhập thành công với tài khoản hợp lệ.
-- Dữ liệu test:
-  - Username: `standard_user`
-  - Password: `secret_sauce`
-- Các bước thực hiện:
-  1. Mở website SauceDemo.
-  2. Nhập username và password hợp lệ.
-  3. Nhấn nút Login.
-  4. Kiểm tra người dùng được chuyển đến trang sản phẩm.
-- Kết quả mong đợi:
-  - URL có chứa `inventory.html`.
-  - Tiêu đề trang hiển thị là `Products`.
+Mục tiêu: kiểm tra người dùng đăng nhập thành công bằng tài khoản hợp lệ.
 
-### TC02: Kiểm tra danh sách sản phẩm sau khi đăng nhập
+Dữ liệu kiểm thử:
 
-- Mục tiêu: kiểm tra danh sách sản phẩm được hiển thị sau khi đăng nhập thành công.
-- Các bước thực hiện:
-  1. Đăng nhập vào website bằng tài khoản hợp lệ.
-  2. Chờ danh sách sản phẩm hiển thị.
-  3. Kiểm tra số lượng sản phẩm trên trang.
-- Kết quả mong đợi:
-  - Trang có ít nhất một sản phẩm.
-  - Tên sản phẩm đầu tiên được hiển thị.
+- Username: `standard_user`
+- Password: `secret_sauce`
 
-### TC03: Thêm sản phẩm Sauce Labs Backpack vào giỏ hàng
+Các bước thực hiện:
 
-- Mục tiêu: kiểm tra chức năng thêm sản phẩm vào giỏ hàng.
-- Các bước thực hiện:
-  1. Đăng nhập vào website bằng tài khoản hợp lệ.
-  2. Nhấn nút Add to cart của sản phẩm Sauce Labs Backpack.
-  3. Kiểm tra biểu tượng giỏ hàng.
-- Kết quả mong đợi:
-  - Số lượng sản phẩm trong giỏ hàng hiển thị là `1`.
-
-## 8. Kết quả mong đợi chung
-
-Khi chạy lệnh:
-
-```bash
-pytest -v
-```
+1. Mở website SauceDemo.
+2. Nhập username và password.
+3. Nhấn nút Login.
+4. Kiểm tra trang chuyển sang trang sản phẩm.
 
 Kết quả mong đợi:
+
+- URL có chứa `inventory.html`.
+- Tiêu đề trang hiển thị là `Products`.
+
+Ảnh minh họa kết quả đăng nhập:
+
+![Đăng nhập thành công](screenshots/login-success.png)
+
+Kết luận: chức năng đăng nhập hoạt động đúng khi sử dụng tài khoản hợp lệ.
+
+## Test case 02: Kiểm tra danh sách sản phẩm
+
+Mục tiêu: kiểm tra danh sách sản phẩm được hiển thị sau khi đăng nhập thành công.
+
+Các bước thực hiện:
+
+1. Đăng nhập vào website bằng tài khoản hợp lệ.
+2. Chờ danh sách sản phẩm hiển thị.
+3. Kiểm tra số lượng sản phẩm trên trang.
+
+Kết quả mong đợi:
+
+- Danh sách sản phẩm được hiển thị.
+- Có ít nhất một sản phẩm xuất hiện trên trang.
+
+Ảnh minh họa danh sách sản phẩm:
+
+![Danh sách sản phẩm](screenshots/product-list.png)
+
+Kết luận: sau khi đăng nhập, website hiển thị danh sách sản phẩm đúng như mong đợi.
+
+## Test case 03: Thêm sản phẩm vào giỏ hàng
+
+Mục tiêu: kiểm tra chức năng thêm sản phẩm Sauce Labs Backpack vào giỏ hàng.
+
+Các bước thực hiện:
+
+1. Đăng nhập vào website bằng tài khoản hợp lệ.
+2. Nhấn nút Add to cart của sản phẩm Sauce Labs Backpack.
+3. Kiểm tra số lượng sản phẩm trên biểu tượng giỏ hàng.
+
+Kết quả mong đợi:
+
+- Sản phẩm được thêm vào giỏ hàng.
+- Số lượng trên giỏ hàng hiển thị là `1`.
+
+Ảnh minh họa giỏ hàng:
+
+![Thêm sản phẩm vào giỏ hàng](screenshots/cart-badge.png)
+
+Kết luận: chức năng thêm sản phẩm vào giỏ hàng hoạt động đúng, số lượng sản phẩm trong giỏ hàng hiển thị chính xác.
+
+## Kết quả mong đợi chung
+
+Khi chạy lệnh `pytest -v`, cả 3 test case đều phải có trạng thái `PASSED`.
 
 ```text
 tests/test_saucedemo.py::test_tc01_login_successfully PASSED
@@ -136,61 +146,28 @@ tests/test_saucedemo.py::test_tc02_product_list_displayed_after_login PASSED
 tests/test_saucedemo.py::test_tc03_add_backpack_to_cart PASSED
 ```
 
-Toàn bộ 3 test case đều chạy thành công.
+Kết luận chung: website SauceDemo hoạt động đúng với các chức năng cơ bản gồm đăng nhập, hiển thị danh sách sản phẩm và thêm sản phẩm vào giỏ hàng.
 
-## 9. Ảnh minh họa kết quả chạy test
+## Hướng dẫn chèn ảnh minh họa
 
-Phần này dùng để chèn ảnh chụp màn hình kết quả chạy lệnh `pytest -v`.
+Sau khi chạy test, chụp màn hình kết quả và lưu vào thư mục `screenshots`.
 
-Ảnh minh họa sẽ được lưu trong thư mục `screenshots` của project.
-
-```text
-saucedemo-selenium-pytest/
-└── screenshots/
-    └── pytest-result.png
-```
-
-Sau khi chạy lệnh `pytest -v`, có thể chụp màn hình terminal hiển thị kết quả test và lưu ảnh vào thư mục `screenshots`.
-
-Sau đó chèn ảnh vào README bằng cú pháp Markdown sau:
-
-```markdown
-![Kết quả chạy test](screenshots/pytest-result.png)
-```
-
-Khi đã có ảnh thật, phần hiển thị trong README sẽ như sau:
-
-![Kết quả chạy test](screenshots/pytest-result.png)
-
-Nếu ảnh chưa được thêm vào project, GitHub có thể hiển thị biểu tượng ảnh bị thiếu. Sau khi thêm file `screenshots/pytest-result.png` và push lên GitHub, ảnh sẽ hiển thị bình thường.
-
-Các bước thực hiện:
-
-1. Chạy test bằng lệnh:
-
-```bash
-pytest -v
-```
-
-2. Chụp màn hình kết quả chạy test.
-3. Lưu ảnh với tên:
+Tên ảnh nên đặt như sau:
 
 ```text
+screenshots/saucedemo-home.png
 screenshots/pytest-result.png
+screenshots/login-success.png
+screenshots/product-list.png
+screenshots/cart-badge.png
 ```
 
-4. Thêm ảnh vào git và push lên GitHub:
+Sau đó thêm ảnh lên GitHub:
 
 ```bash
-git add README.md screenshots/pytest-result.png
-git commit -m "Add test result screenshot"
+git add screenshots/
+git commit -m "Add test screenshots"
 git push
 ```
 
-Khi đẩy project lên GitHub, ảnh minh họa sẽ được hiển thị trực tiếp trong file README nếu đường dẫn ảnh chính xác.
-
-## 10. Ghi chú
-
-- Cần cài đặt Google Chrome trên máy trước khi chạy test.
-- Lần chạy đầu tiên có thể mất thêm thời gian vì `webdriver-manager` cần tải ChromeDriver phù hợp.
-- Nếu Chrome hoặc ChromeDriver thay đổi phiên bản, `webdriver-manager` sẽ tự động hỗ trợ quản lý driver.
+Khi ảnh đã được thêm đúng đường dẫn, GitHub sẽ hiển thị ảnh trực tiếp trong README.
