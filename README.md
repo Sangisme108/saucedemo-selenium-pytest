@@ -138,11 +138,11 @@ tests/test_saucedemo.py::test_tc03_add_backpack_to_cart PASSED
 
 Toàn bộ 3 test case đều chạy thành công.
 
-## 9. Hướng dẫn chèn ảnh minh họa kết quả chạy test
+## 9. Ảnh minh họa kết quả chạy test
 
-Sau khi chạy lệnh `pytest -v`, có thể chụp màn hình terminal hiển thị kết quả test và lưu ảnh vào thư mục `screenshots`.
+Phần này dùng để chèn ảnh chụp màn hình kết quả chạy lệnh `pytest -v`.
 
-Ví dụ:
+Ảnh minh họa sẽ được lưu trong thư mục `screenshots` của project.
 
 ```text
 saucedemo-selenium-pytest/
@@ -150,10 +150,41 @@ saucedemo-selenium-pytest/
     └── pytest-result.png
 ```
 
-Sau đó chèn ảnh vào README bằng cú pháp Markdown:
+Sau khi chạy lệnh `pytest -v`, có thể chụp màn hình terminal hiển thị kết quả test và lưu ảnh vào thư mục `screenshots`.
+
+Sau đó chèn ảnh vào README bằng cú pháp Markdown sau:
 
 ```markdown
 ![Kết quả chạy test](screenshots/pytest-result.png)
+```
+
+Khi đã có ảnh thật, phần hiển thị trong README sẽ như sau:
+
+![Kết quả chạy test](screenshots/pytest-result.png)
+
+Nếu ảnh chưa được thêm vào project, GitHub có thể hiển thị biểu tượng ảnh bị thiếu. Sau khi thêm file `screenshots/pytest-result.png` và push lên GitHub, ảnh sẽ hiển thị bình thường.
+
+Các bước thực hiện:
+
+1. Chạy test bằng lệnh:
+
+```bash
+pytest -v
+```
+
+2. Chụp màn hình kết quả chạy test.
+3. Lưu ảnh với tên:
+
+```text
+screenshots/pytest-result.png
+```
+
+4. Thêm ảnh vào git và push lên GitHub:
+
+```bash
+git add README.md screenshots/pytest-result.png
+git commit -m "Add test result screenshot"
+git push
 ```
 
 Khi đẩy project lên GitHub, ảnh minh họa sẽ được hiển thị trực tiếp trong file README nếu đường dẫn ảnh chính xác.
